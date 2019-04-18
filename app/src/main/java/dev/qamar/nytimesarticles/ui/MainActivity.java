@@ -1,5 +1,7 @@
 package dev.qamar.nytimesarticles.ui;
 
+import android.app.AlertDialog;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int DEFAULT_NEWS_PERIOD = 1;
     private Unbinder unbinder;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         unbinder = ButterKnife.bind(this);
 
         showArticles(DEFAULT_NEWS_PERIOD);
+
+        handler = new Handler();
+        handler.postDelayed(welcomeRunnable,5000);
     }
 
     private void showArticles(int period) {
@@ -63,6 +69,19 @@ public class MainActivity extends AppCompatActivity {
                 return R.string.monthly_news;
         }
         return R.string.news;
+    }
+
+    Runnable welcomeRunnable = () -> {
+        new AlertDialog.Builder(this)
+                .setTitle("Welcome to My NYT")
+                .setView(R.layout.dialog_welcome)
+                .setPositiveButton("OK",null).show();
+    };
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        handler.removeCallbacks(welcomeRunnable);
     }
 
     @Override

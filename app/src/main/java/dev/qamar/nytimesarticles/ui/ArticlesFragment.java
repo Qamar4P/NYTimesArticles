@@ -9,11 +9,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
 import butterknife.BindView;
 import dev.qamar.nytimesarticles.R;
+import dev.qamar.nytimesarticles.data.model.MediaMetadatum;
+import dev.qamar.nytimesarticles.data.model.Medium;
 import dev.qamar.nytimesarticles.data.model.NewsArticle;
 import dev.qamar.nytimesarticles.helpers.ItemViewClickListener;
 import dev.qamar.nytimesarticles.helpers.LolAdapter;
@@ -64,7 +71,7 @@ public class ArticlesFragment extends BaseFragment {
             mNewsPeriod = getArguments().getInt(NEWS_PERIOD);
             loadArticles(mNewsPeriod);
         }
-
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -108,6 +115,10 @@ public class ArticlesFragment extends BaseFragment {
         TextView textTitle;
         @BindView(R.id.textAuthor)
         TextView textDesc;
+        @BindView(R.id.textDate)
+        TextView textDate;
+        @BindView(R.id.imageProfile)
+        ImageView imageProfile;
 
         ItemViewHold(ViewGroup parent) {
             super(parent,R.layout.list_item);
@@ -115,7 +126,24 @@ public class ArticlesFragment extends BaseFragment {
         @Override
         public void bind() {
             textTitle.setText(data.getTitle());
-            textDesc.setText(data.getSource());
+            textDesc.setText(data.getByline());
+            textDate.setText(data.getPublishedDate());
+
+            List<Medium> medias = data.getMedia();
+            if (medias != null) {
+                for (Medium media : medias) {
+                    if (media.getType().equalsIgnoreCase("image")) {
+                        //choose small size
+                        for (MediaMetadatum mediaMetadatum : media.getMediaMetadata()) {
+                            if (mediaMetadatum.getWidth() >= 320 && mediaMetadatum.getWidth() < 800) {
+                                Picasso.with(imageProfile.getContext()).load(media.getMediaMetadata().get(0).getUrl()).into(imageProfile);
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
         }
     }
 }

@@ -21,10 +21,10 @@ public class ArticlesViewModel extends ViewModel {
     private CompositeDisposable disposable = new CompositeDisposable();
     private NewsArticlesRepo repo = new NewsArticlesRepo();
 
-    @VisibleForTesting
     private final MutableLiveData<List<NewsArticle>> articles = new MutableLiveData<>();
     private final MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
+    @VisibleForTesting
     void loadArticles(int period) {
         loading.setValue(true);
         disposable.add(

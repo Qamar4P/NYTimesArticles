@@ -36,6 +36,20 @@ ext.circularProgressbarVersion = "1.1.1"
 ext.jodaTimeVersion = "2.9.9"
 ext.mockWebServerVersion = "3.8.1"
 
+ext.deps = [:]
+def versions = [:]
+
+versions.mockito = "2.25.0"
+versions.mockito_all = "1.10.19"
+versions.mockito_android = "2.25.0"
+versions.mockwebserver = "3.8.1"
+
+def mockito = [:]
+mockito.core = "org.mockito:mockito-core:$versions.mockito"
+mockito.all = "org.mockito:mockito-all:$versions.mockito_all"
+mockito.android = "org.mockito:mockito-android:$versions.mockito_android"
+deps.mockito = mockito
+
 
 allprojects {
     repositories {
