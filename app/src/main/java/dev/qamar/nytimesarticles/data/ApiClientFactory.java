@@ -1,6 +1,7 @@
 package dev.qamar.nytimesarticles.data;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import dev.qamar.nytimesarticles.BuildConfig;
 import dev.qamar.nytimesarticles.utils.AppConst;
@@ -32,6 +33,7 @@ public class ApiClientFactory {
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(logging);
         }
+        builder.connectTimeout(5, TimeUnit.SECONDS);
         builder.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {

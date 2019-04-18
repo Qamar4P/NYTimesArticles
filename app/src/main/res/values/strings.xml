@@ -5,5 +5,5 @@
     <string name="daily_news">NY Times Daily</string>
     <string name="weekly_news">NY Times Weekly</string>
     <string name="monthly_news">NY Times Monthly</string>
-    <string name="thanks_msg">Thanks for giving me a chance of presenting the assessment test.</string>
+    <string name="thanks_msg">Thanks for giving me a chance of presenting the assessment test.\nStackoverflow score: 2500</string>
 </resources>
