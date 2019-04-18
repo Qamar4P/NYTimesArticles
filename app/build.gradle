@@ -55,6 +55,6 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.airbnb.android:lottie:2.7.0'
-    compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
 
 }
